@@ -51,6 +51,7 @@ export class VoiceRecorderComponent implements OnInit {
 
   pauseRecording() {
     if (this.mediaRecorder.state === 'recording') {
+      this.mediaRecorder.requestData();
       this.mediaRecorder.pause();
       this.isRecording = false;
     }
