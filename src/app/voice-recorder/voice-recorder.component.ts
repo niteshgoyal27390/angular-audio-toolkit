@@ -35,6 +35,12 @@ export class VoiceRecorderComponent implements OnInit {
           this.audioPlayer.nativeElement.src = audioURL;
         };
 
+        this.mediaRecorder.onpause = () => {
+          const blob = new Blob(this.chunks, { type: 'audio/mp3' });
+          const audioURL = window.URL.createObjectURL(blob);
+          this.audioPlayer.nativeElement.src = audioURL;
+        };
+
         this.mediaRecorder.start();
         this.isRecording = true;
       })
@@ -51,6 +57,7 @@ export class VoiceRecorderComponent implements OnInit {
   }
 
   resumeRecording() {
+    this.audioPlayer.nativeElement.src = "";
     if (this.mediaRecorder.state === 'paused') {
       this.mediaRecorder.resume();
       this.isRecording = true;
