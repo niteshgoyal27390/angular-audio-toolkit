@@ -1,1 +1,8 @@
-<p>voice-recorder works!</p>
+<div>
+    <button (click)="startRecording()" [disabled]="isRecording">Start Recording</button>
+    <button (click)="pauseRecording()" [disabled]="!isRecording || mediaRecorder?.state !== 'recording'">Pause Recording</button>
+    <button (click)="resumeRecording()" [disabled]="isRecording || mediaRecorder?.state !== 'paused'">Resume Recording</button>
+    <button (click)="stopRecording()">Stop Recording</button>
+  </div>
+  
+<audio #audioPlayer controls></audio>
