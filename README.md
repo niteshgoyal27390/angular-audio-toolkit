@@ -9,6 +9,7 @@ This repository contains an Angular application that allows users to record audi
 - Resume recording: Continue the recording process after it has been paused.
 - Stop recording: End the recording process and save the recorded audio.
 - Playback during pause: Listen to the recorded audio while the recording is paused.
+- Download the audio file after recording is finished or when paused.
 
 ## Technologies Used:
 
