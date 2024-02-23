@@ -8,10 +8,17 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class VoiceRecorderComponent implements OnInit {
 
   @ViewChild('audioPlayer') audioPlayer: ElementRef;
+  @ViewChild('playButton') playButton: ElementRef;
+  @ViewChild('forwardButton') forwardButton: ElementRef;
+  @ViewChild('backwardButton') backwardButton: ElementRef;
 
   mediaRecorder: MediaRecorder;
   chunks: Blob[] = [];
   isRecording: boolean = false;
+  audioUrl = ""
+
+  isPlaying = false;
+  currentTime = 0;
 
   constructor() { }
 
@@ -54,6 +61,8 @@ export class VoiceRecorderComponent implements OnInit {
       this.mediaRecorder.requestData();
       this.mediaRecorder.pause();
       this.isRecording = false;
+      this.currentTime = 0;
+      this.playButton.nativeElement.disabled = false;
     }
   }
 
@@ -62,6 +71,7 @@ export class VoiceRecorderComponent implements OnInit {
     if (this.mediaRecorder.state === 'paused') {
       this.mediaRecorder.resume();
       this.isRecording = true;
+      this.playButton.nativeElement.disabled = true;
     }
   }
 
@@ -69,7 +79,32 @@ export class VoiceRecorderComponent implements OnInit {
     if (this.mediaRecorder.state !== 'inactive') {
       this.mediaRecorder.stop();
       this.isRecording = false;
+      this.playButton.nativeElement.disabled = false;
     }
+  }
+
+
+  playPause() {
+    if (this.isPlaying) {
+      this.audioPlayer.nativeElement.pause();
+      this.playButton.nativeElement.textContent = 'Play';
+    } else {
+      this.audioPlayer.nativeElement.play();
+      this.playButton.nativeElement.textContent = 'Pause';
+    }
+    this.isPlaying = !this.isPlaying;
+  }
+  
+  forward(seconds: number) {
+    this.currentTime = this.audioPlayer.nativeElement.currentTime;
+    this.currentTime = Math.min(this.audioPlayer.nativeElement.duration, this.currentTime + seconds);
+    this.audioPlayer.nativeElement.currentTime = this.currentTime;
+  }
+  
+  backward(seconds: number) {
+    this.currentTime = this.audioPlayer.nativeElement.currentTime;
+    this.currentTime = Math.max(0, this.currentTime - seconds);
+    this.audioPlayer.nativeElement.currentTime = this.currentTime;
   }
 
 }

@@ -1,8 +1,25 @@
-<div>
-    <button (click)="startRecording()" [disabled]="isRecording">Start Recording</button>
-    <button (click)="pauseRecording()" [disabled]="!isRecording || mediaRecorder?.state !== 'recording'">Pause Recording</button>
-    <button (click)="resumeRecording()" [disabled]="isRecording || mediaRecorder?.state !== 'paused'">Resume Recording</button>
-    <button (click)="stopRecording()">Stop Recording</button>
+<div class="container">
+  <div>
+    Recorder
+    <div class="audio-recorder">
+      <button (click)="startRecording()" [disabled]="isRecording">Start Recording</button>
+      <button (click)="pauseRecording()" [disabled]="!isRecording || mediaRecorder?.state !== 'recording'">Pause Recording</button>
+      <button (click)="resumeRecording()" [disabled]="isRecording || mediaRecorder?.state !== 'paused'">Resume Recording</button>
+      <button (click)="stopRecording()">Stop Recording</button>
+    </div>
   </div>
   
-<audio #audioPlayer controls></audio>
+  <div>
+    Player
+    <div class="audio-player">
+      <div class="audio-tag">
+        <audio #audioPlayer controls></audio>
+      </div>
+      <div class="buttons">
+        <button #forwardButton (click)="forward(10)">Forward 10s</button>
+        <button #playButton (click)="playPause()">Play</button>
+        <button #backwardButton (click)="backward(10)">Backward 10s</button>
+      </div>
+    </div>
+  </div>
+</div>

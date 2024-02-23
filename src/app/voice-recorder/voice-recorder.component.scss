@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: space-evenly;
+    .audio-recorder{
+        display: flex;
+        justify-content: center;
+        button {
+            margin: 1rem;
+        }
+        border: 1px solid black;
+    }
+    .audio-player{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid black;
+        .audio-tag{
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+            margin: 1rem;
+
+            button{
+                margin: 1rem;
+            }
+        }
+
+    }
+}
